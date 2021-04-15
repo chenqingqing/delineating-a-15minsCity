@@ -1,0 +1,54 @@
+---
+title: "Construct street networks"
+author: "Qingqing Chen"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  workflowr::wflow_html:
+    toc: false
+    code_folding: hide
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+library(here)
+library(tidyverse)
+library(dplyr)
+library(sf)
+library(tmap)
+```
+
+## Construct street networks
+
+### Download network from Open Street Map
+```{python eval=F}
+# get administrative place boundaries and shapefiles 
+import osmnx as ox
+city = ox.geocode_to_gdf('Queens, New York City, New York, USA')
+ax = ox.project_gdf(city).plot()
+_ = ax.axis('off')
+
+# download and model street networks
+queens = ox.graph_from_address('Queens, New York City, New York, USA', network_type = 'walk', dist = 1500)
+ox.plot_graph(queens)
+
+ox.io.save_graph_shapefile(queens, filepath="../data/interim/street-network", encoding='utf-8', directed=False)
+```
+
+### Load street networks
+```{r}
+##load data
+sf_queens_2km <- read_sf(here("data/queens2km_street_networks/edges.shp"))
+## only keep residential streets 
+sf_queens_residential <- sf_queens_2km %>% 
+  filter(highway == "residential") %>% 
+  dplyr::select(osmid, name, length)
+
+tm_shape(sf_queens_residential) + 
+  tm_lines(col = "blue", lwd = 1.5) +
+  tm_layout(frame = F) +
+  tm_credits("Residential street networks of Queens, New York City (2km from geographical center)", 
+              position = c("left", "bottom"))
+```
+
