@@ -1,7 +1,7 @@
 name: "draw-15minsCity-bubbles"
 output_dir: ../docs
 navbar:
-  title: "draw-15minsCity-bubbles"
+  title: "Drawing 15-mins City Bubbles"
   left:
   - text: Home
     href: index.html
