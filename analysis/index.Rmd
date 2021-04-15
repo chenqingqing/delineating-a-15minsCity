@@ -17,3 +17,4 @@ body {text-align: justify}
 ### Contents
 
 - [Chapter 1: Construct street networks](001-construct-street-networks.html)
+- [Chapter 2: Extract POIs](002-extract-POIs.html)
