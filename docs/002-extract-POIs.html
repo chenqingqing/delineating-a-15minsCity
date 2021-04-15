@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Qingqing Chen" />
+
+
+<title>Extract POIs</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Drawing 15-mins City Bubbles</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Extract POIs</h1>
+<h4 class="author">Qingqing Chen</h4>
+<h4 class="date">15 April, 2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-04-15
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>draw-15minsCity-bubbles/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20210414code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20210414)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20210414code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20210414)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree2738ed7419be0a6dc07081bf310698ccb3124debtargetblank2738ed7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/2738ed7419be0a6dc07081bf310698ccb3124deb" target="_blank">2738ed7</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree2738ed7419be0a6dc07081bf310698ccb3124debtargetblank2738ed7a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/2738ed7419be0a6dc07081bf310698ccb3124deb" target="_blank">2738ed7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rproj.user/
+    Ignored:    data/POIs/
+    Ignored:    data/queens1500m_street_networks/
+    Ignored:    data/queens2km_street_networks/
+    Ignored:    data/streets_with_POIs/
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/002-extract-POIs.Rmd</code>) and HTML (<code>docs/002-extract-POIs.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/blob/2738ed7419be0a6dc07081bf310698ccb3124deb/analysis/002-extract-POIs.Rmd" target="_blank">2738ed7</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-04-15
+</td>
+<td>
+extract POIs
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-street-networks" class="section level3">
+<h3>Load street networks</h3>
+<pre class="r"><code>##load data
+sf_queens_2km &lt;- read_sf(here(&quot;data/queens2km_street_networks/edges.shp&quot;))
+## only keep residential streets 
+sf_queens_residential &lt;- sf_queens_2km %&gt;% 
+  filter(highway == &quot;residential&quot;) %&gt;% 
+  dplyr::select(osmid, name, length)</code></pre>
+</div>
+<div id="extract-pois" class="section level3">
+<h3>Extract POIs</h3>
+<div id="sustenance" class="section level4">
+<h4>Sustenance</h4>
+<pre class="r"><code># head(available_features())
+# head(available_tags(&quot;amenity&quot;))
+# head(available_tags(&quot;shop&quot;))
+
+extract_pois &lt;- function(bb, key_nm, value_nm, type){
+  pois &lt;- opq(bbox = bb) %&gt;% 
+    add_osm_feature(key = key_nm, value = value_nm) %&gt;%
+    osmdata_sf()
+  
+  if(key_nm == &quot;amenity&quot;){
+    pois$osm_points %&gt;% 
+      filter(!is.na(amenity)) %&gt;% 
+      mutate(poi = type) %&gt;% 
+      dplyr::select(osm_id, poi, amenity) %&gt;% 
+      rename(type = amenity)
+  }else{
+    pois$osm_points %&gt;% 
+      filter(!is.na(shop)) %&gt;% 
+      mutate(poi = type) %&gt;% 
+      dplyr::select(osm_id, poi, shop) %&gt;% 
+      rename(type = shop)
+  }
+}
+
+## Sustenance
+sf_sustenance &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+             key_nm = &quot;amenity&quot;, 
+             value_nm = c(&quot;bar&quot;, &quot;biergarten&quot;, &quot;cafe&quot;, &quot;fast_food&quot;, &quot;food_court&quot;, &quot;pub&quot;, &quot;restaurant&quot;), 
+             type = &quot;Sustenance&quot;)
+
+## shops - food, beverages 
+shop_nms &lt;- c(&quot;alcohol&quot;, &quot;bakery&quot;, &quot;beverages&quot;, &quot;brewing_supplies&quot;, &quot;butcher&quot;, &quot;cheese&quot;, &quot;chocolate&quot;, &quot;coffee&quot;, &quot;confectionery&quot;, &quot;convenience&quot;, &quot;deli&quot;, &quot;dairy&quot;, &quot;farm&quot;, &quot;frozen_food&quot;, &quot;greengrocer&quot;, &quot;health_food&quot;, &quot;ice_cream&quot;, &quot;pasta&quot;, &quot;seafood&quot;, &quot;spices&quot;, &quot;tea&quot;, &quot;water&quot;)
+sf_shop_food_beverages &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                                       key_nm = &quot;shop&quot;, 
+                                       value_nm = shop_nms, 
+                                       type = &quot;Sustenance&quot;)
+sf_sustenance &lt;- bind_rows(sf_sustenance, sf_shop_food_beverages)</code></pre>
+</div>
+<div id="facilities" class="section level4">
+<h4>Facilities</h4>
+<pre class="r"><code>## Facilities
+sf_facilities &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = &quot;amenity&quot;, 
+                              value_nm = c(&quot;bbq&quot;, &quot;bench&quot;, &quot;dog_toilet&quot;, &quot;drinking_water&quot;, &quot;give_box&quot;, &quot;shelter&quot;, &quot;shower&quot;, &quot;telephone&quot;, &quot;toilets&quot;, &quot;water_point&quot;, &quot;watering_place&quot;), 
+                              type = &quot;Facilities&quot;)</code></pre>
+</div>
+<div id="general-shops" class="section level4">
+<h4>General shops</h4>
+<pre class="r"><code>## shops - general store, department store, mall
+general_shops &lt;- c(&quot;department_store&quot;, &quot;general&quot;, &quot;kiosk&quot;, &quot;mall&quot;, &quot;supermarket&quot;, &quot;wholesale&quot;, &quot;baby_goods&quot;, &quot;bag&quot;, &quot;boutique&quot;, &quot;clothes&quot;, &quot;fabric&quot;, &quot;fashion_accessories&quot;, &quot;jewelry&quot;, &quot;leather&quot;, &quot;sewing&quot;, &quot;shoes&quot;, &quot;tailor&quot;, &quot;watches&quot;, &quot;wool&quot;, &quot;charity&quot;, &quot;second_hand&quot;, &quot;variety_store&quot;, &quot;agrarian&quot;, &quot;appliance&quot;, &quot;bathroom_furnishing&quot;, &quot;doityourself&quot;, &quot;electrical&quot;, &quot;energy&quot;, &quot;fireplace&quot;, &quot;florist&quot;, &quot;garden_centre&quot;, &quot;garden_furniture&quot;, &quot;gas&quot;, &quot;glaziery&quot;, &quot;groundskeeping&quot;, &quot;hardware&quot;, &quot;houseware&quot;, &quot;locksmith&quot;, &quot;paint&quot;, &quot;security&quot;, &quot;trade&quot;, &quot;antiques&quot;, &quot;bed&quot;, &quot;candles&quot;, &quot;carpet&quot;, &quot;curtain&quot;, &quot;doors&quot;, &quot;flooring&quot;, &quot;furniture&quot;, &quot;household_linen&quot;, &quot;interior_decoration&quot;, &quot;kitchen&quot;, &quot;lighting&quot;, &quot;tiles&quot;, &quot;window_blind&quot;, &quot;computer&quot;, &quot;electronics&quot;, &quot;hifi&quot;, &quot;mobile_phone&quot;, &quot;radiotechnics&quot;, &quot;vacuum_cleaner&quot;, &quot;anime&quot;, &quot;books&quot;, &quot;gift&quot;, &quot;lottery&quot;, &quot;newsagent&quot;, &quot;stationery&quot;, &quot;ticket&quot;, &quot;bookmaker&quot;, &quot;cannabis&quot;, &quot;copyshop&quot;, &quot;dry_cleaning&quot;, &quot;e-cigarette&quot;, &quot;funeral_directors&quot;, &quot;laundry&quot;, &quot;money_lender&quot;, &quot;party&quot;, &quot;pawnbroker&quot;, &quot;pet&quot;, &quot;pet_grooming&quot;, &quot;pest_control&quot;, &quot;pyrotechnics&quot;, &quot;religion&quot;, &quot;storage_rental&quot;, &quot;tobacco&quot;, &quot;toys&quot;, &quot;travel_agency&quot;, &quot;vacant&quot;, &quot;weapons&quot;, &quot;outpost&quot;, &quot;user defined&quot;)
+sf_generalStore &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = &quot;shop&quot;, 
+                              value_nm = general_shops, 
+                              type = &quot;General store&quot;)</code></pre>
+</div>
+<div id="healthcare" class="section level4">
+<h4>Healthcare</h4>
+<pre class="r"><code>## Healthcare
+sf_healthcare &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = &quot;amenity&quot;, 
+                              value_nm = c(&quot;baby_hatch&quot;, &quot;clinic&quot;, &quot;dentist&quot;, &quot;doctors&quot;, &quot;hospital&quot;, &quot;nursing_home&quot;, &quot;pharmacy&quot;, &quot;social_facility&quot;, &quot;veterinary&quot;), 
+                              type = &quot;Healthcare &amp; Beauty&quot;)
+
+sf_health &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = &quot;shop&quot;, 
+                              value_nm = c(&quot;beauty&quot;, &quot;chemist&quot;, &quot;cosmetics&quot;, &quot;erotic&quot;, &quot;hairdresser&quot;, &quot;hairdresser_supply&quot;, &quot;hearing_aids&quot;, &quot;herbalist&quot;, &quot;message&quot;, &quot;medical_supply&quot;, &quot;nutrition_supplements&quot;, &quot;optician&quot;, &quot;perfumery&quot;, &quot;tattoo&quot;), 
+                              type = &quot;Healthcare &amp; Beauty&quot;)
+sf_healthcare &lt;- bind_rows(sf_healthcare, sf_health)</code></pre>
+</div>
+<div id="entertainment-art-culture" class="section level4">
+<h4>Entertainment, art &amp; culture</h4>
+<pre class="r"><code>## entertainment, art &amp; culture
+sf_entertainment &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = &quot;amenity&quot;, 
+                              value_nm = c(&quot;arts_centre&quot;, &quot;brothel&quot;, &quot;casino&quot;, &quot;cinema&quot;, &quot;community_centre&quot;, &quot;conference_centre&quot;, &quot;events_venue&quot;, &quot;fountain&quot;, &quot;gambling&quot;, &quot;love_hotel&quot;, &quot;nightclub&quot;, &quot;planetarium&quot;, &quot;public_bookcase&quot;, &quot;social_centre&quot;, &quot;stripclub&quot;, &quot;studio&quot;, &quot;swingerclub&quot;, &quot;theatre&quot;), 
+                              type = &quot;Entertainment, art &amp; culture&quot;)</code></pre>
+<pre class="r"><code>## Education
+sf_education &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = &quot;amenity&quot;, 
+                              value_nm = c(&quot;college&quot;, &quot;driving_school&quot;, &quot;kindergarten&quot;, &quot;language_school&quot;, &quot;library&quot;, &quot;toy_library&quot;, &quot;music_school&quot;, &quot;school&quot;, &quot;university&quot;), 
+                              type = &quot;Education&quot;)</code></pre>
+</div>
+<div id="transportation" class="section level4">
+<h4>Transportation</h4>
+<pre class="r"><code>## Transportation
+sf_transportation &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = &quot;amenity&quot;, 
+                              value_nm = c(&quot;bicycle_parking&quot;, &quot;bicycle_repair_station&quot;, &quot;bicycle_rental&quot;, &quot;boat_rental&quot;, &quot;boat_sharing&quot;, &quot;bus_station&quot;, &quot;car_rental&quot;, &quot;car_sharing&quot;, &quot;car_wash&quot;, &quot;vehicle_inspection&quot;, &quot;charging_station&quot;, &quot;ferry_terminal&quot;, &quot;fuel&quot;, &quot;grit_bin&quot;, &quot;motorcycle_parking&quot;, &quot;parking&quot;, &quot;parking_entrance&quot;, &quot;parking_space&quot;, &quot;taxi&quot;), 
+                              type = &quot;Transportation&quot;)</code></pre>
+</div>
+<div id="financial" class="section level4">
+<h4>Financial</h4>
+<pre class="r"><code>## Financial 
+sf_financial &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = &quot;amenity&quot;, 
+                              value_nm = c(&quot;atm&quot;, &quot;bank&quot;, &quot;bureau_de_change&quot;), 
+                              type = &quot;Financial&quot;)</code></pre>
+</div>
+<div id="public-service" class="section level4">
+<h4>Public service</h4>
+<pre class="r"><code>## public service
+sf_publicService &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = &quot;amenity&quot;, 
+                              value_nm = c(&quot;courthouse&quot;, &quot;embassy&quot;, &quot;fire_station&quot;, &quot;police&quot;, &quot;post_box&quot;, &quot;post_office&quot;, &quot;prison&quot;, &quot;ranger_station&quot;, &quot;townhall&quot;), 
+                              type = &quot;Public service&quot;)</code></pre>
+</div>
+<div id="combined-pois" class="section level4">
+<h4>Combined POIs</h4>
+<pre class="r"><code>full_pois &lt;- bind_rows(sf_sustenance, sf_facilities, sf_generalStore, sf_healthcare, sf_entertainment, sf_education, sf_transportation, sf_financial, sf_publicService) %&gt;% 
+  rename(POIs = poi)
+write_sf(full_pois, here::here(&quot;data/POIs/poi_points.shp&quot;))</code></pre>
+</div>
+</div>
+<div id="visualization" class="section level3">
+<h3>Visualization</h3>
+<pre class="r"><code>tm_shape(sf_queens_residential) + 
+  tm_lines() + 
+  tm_shape(full_pois) + 
+  tm_dots(col = &quot;POIs&quot;, size = 0.05) + 
+  tm_layout(legend.outside = T)</code></pre>
+<p><img src="figure/002-extract-POIs.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="assign-pois-to-streets" class="section level3">
+<h3>Assign POIs to streets</h3>
+<pre class="r"><code># create 5m buffer
+poi_buffers5m &lt;- full_pois %&gt;% st_buffer(., dist = 0.0005) 
+  
+tm_shape(poi_buffers5m) +
+  tm_polygons(border.col = &quot;red&quot;) + 
+    tm_shape(full_pois) + 
+    tm_dots(col = &quot;POIs&quot;) + 
+    tm_shape(sf_queens_residential) +
+    tm_lines(col = &quot;blue&quot;) + 
+    tm_layout(legend.outside = T)</code></pre>
+<p><img src="figure/002-extract-POIs.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>streets_with_POIs_queens2km &lt;- sf_queens_residential %&gt;% 
+  rownames_to_column(var = &quot;id&quot;) %&gt;% 
+  mutate(id = factor(id, levels = id)) %&gt;% 
+  st_join(., poi_buffers5m) %&gt;% 
+  mutate(POIs = if_else(is.na(POIs), 0, 1)) %&gt;% 
+  group_by(id) %&gt;%
+  dplyr::summarise(n_pois = sum(POIs) %&gt;% as.integer(), 
+                   n_type = n_distinct(type)) %&gt;% 
+  mutate(n_type = if_else(n_pois == 0, 0, as.numeric(n_type))) %&gt;% 
+  left_join(., sf_queens_residential %&gt;% st_set_geometry(NULL) %&gt;% rownames_to_column(var = &quot;id&quot;)) %&gt;% 
+  dplyr::select(id, osmid, name, length, n_pois, n_type)
+
+write_sf(streets_with_POIs_queens2km, here::here(&quot;data/streets_with_POIs/streets_with_POIs_queens2km.shp&quot;))</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.4 (2021-02-15)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] osmdata_0.1.4   tmap_3.3-1      sf_0.9-7        forcats_0.5.1  
+ [5] stringr_1.4.0   dplyr_1.0.5     purrr_0.3.4     readr_1.4.0    
+ [9] tidyr_1.1.3     tibble_3.1.0    ggplot2_3.3.3   tidyverse_1.3.0
+[13] here_1.0.1     
+
+loaded via a namespace (and not attached):
+ [1] fs_1.5.0           lubridate_1.7.10   RColorBrewer_1.1-2 httr_1.4.2        
+ [5] rprojroot_2.0.2    tools_4.0.4        backports_1.2.1    bslib_0.2.4       
+ [9] utf8_1.1.4         R6_2.5.0           KernSmooth_2.23-18 DBI_1.1.1         
+[13] colorspace_2.0-0   raster_3.4-5       sp_1.4-5           withr_2.4.1       
+[17] tidyselect_1.1.0   leaflet_2.0.4.1    curl_4.3           compiler_4.0.4    
+[21] git2r_0.28.0       leafem_0.1.3       cli_2.3.1          rvest_0.3.6       
+[25] xml2_1.3.2         sass_0.3.1         scales_1.1.1       classInt_0.4-3    
+[29] digest_0.6.27      rmarkdown_2.7      base64enc_0.1-3    dichromat_2.0-0   
+[33] pkgconfig_2.0.3    htmltools_0.5.1.1  highr_0.8          dbplyr_2.1.0      
+[37] htmlwidgets_1.5.3  rlang_0.4.10       readxl_1.3.1       rstudioapi_0.13   
+[41] jquerylib_0.1.3    generics_0.1.0     jsonlite_1.7.2     crosstalk_1.1.1   
+[45] magrittr_2.0.1     Rcpp_1.0.6         munsell_0.5.0      fansi_0.4.2       
+[49] abind_1.4-5        lifecycle_1.0.0    stringi_1.5.3      leafsync_0.1.0    
+[53] whisker_0.4        yaml_2.2.1         tmaptools_3.1-1    grid_4.0.4        
+[57] parallel_4.0.4     promises_1.2.0.1   crayon_1.4.1       lattice_0.20-41   
+[61] stars_0.5-1        haven_2.3.1        hms_1.0.0          knitr_1.31        
+[65] pillar_1.5.1       codetools_0.2-18   reprex_1.0.0       XML_3.99-0.5      
+[69] glue_1.4.2         evaluate_0.14      modelr_0.1.8       vctrs_0.3.6       
+[73] png_0.1-7          httpuv_1.5.5       cellranger_1.1.0   gtable_0.3.0      
+[77] assertthat_0.2.1   xfun_0.21          lwgeom_0.2-5       broom_0.7.5       
+[81] e1071_1.7-4        later_1.1.0.1      class_7.3-18       viridisLite_0.3.0 
+[85] workflowr_1.6.2    units_0.6-7        ellipsis_0.3.1    </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
