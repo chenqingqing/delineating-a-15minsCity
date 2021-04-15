@@ -5,7 +5,7 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   workflowr::wflow_html:
     toc: false
-    code_folding: hide
+    code_folding: show
 editor_options:
   chunk_output_type: console
 ---
@@ -19,7 +19,6 @@ library(sf)
 library(tmap)
 ```
 
-## Construct street networks
 
 ### Download network from Open Street Map
 ```{python eval=F}
