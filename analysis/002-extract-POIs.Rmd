@@ -1,0 +1,211 @@
+---
+title: "Extract POIs"
+author: "Qingqing Chen"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  workflowr::wflow_html:
+    toc: false
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+library(here)
+library(tidyverse)
+library(dplyr)
+library(sf)
+library(tmap)
+library(osmdata)
+```
+
+
+### Load street networks 
+```{r}
+##load data
+sf_queens_2km <- read_sf(here("data/queens2km_street_networks/edges.shp"))
+## only keep residential streets 
+sf_queens_residential <- sf_queens_2km %>% 
+  filter(highway == "residential") %>% 
+  dplyr::select(osmid, name, length)
+```
+
+### Extract POIs
+
+#### Sustenance
+```{r}
+# head(available_features())
+# head(available_tags("amenity"))
+# head(available_tags("shop"))
+
+extract_pois <- function(bb, key_nm, value_nm, type){
+  pois <- opq(bbox = bb) %>% 
+    add_osm_feature(key = key_nm, value = value_nm) %>%
+    osmdata_sf()
+  
+  if(key_nm == "amenity"){
+    pois$osm_points %>% 
+      filter(!is.na(amenity)) %>% 
+      mutate(poi = type) %>% 
+      dplyr::select(osm_id, poi, amenity) %>% 
+      rename(type = amenity)
+  }else{
+    pois$osm_points %>% 
+      filter(!is.na(shop)) %>% 
+      mutate(poi = type) %>% 
+      dplyr::select(osm_id, poi, shop) %>% 
+      rename(type = shop)
+  }
+}
+
+## Sustenance
+sf_sustenance <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+             key_nm = "amenity", 
+             value_nm = c("bar", "biergarten", "cafe", "fast_food", "food_court", "pub", "restaurant"), 
+             type = "Sustenance")
+
+## shops - food, beverages 
+shop_nms <- c("alcohol", "bakery", "beverages", "brewing_supplies", "butcher", "cheese", "chocolate", "coffee", "confectionery", "convenience", "deli", "dairy", "farm", "frozen_food", "greengrocer", "health_food", "ice_cream", "pasta", "seafood", "spices", "tea", "water")
+sf_shop_food_beverages <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                                       key_nm = "shop", 
+                                       value_nm = shop_nms, 
+                                       type = "Sustenance")
+sf_sustenance <- bind_rows(sf_sustenance, sf_shop_food_beverages)
+```
+
+
+
+#### Facilities
+```{r}
+## Facilities
+sf_facilities <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = "amenity", 
+                              value_nm = c("bbq", "bench", "dog_toilet", "drinking_water", "give_box", "shelter", "shower", "telephone", "toilets", "water_point", "watering_place"), 
+                              type = "Facilities")
+```
+
+
+#### General shops 
+
+```{r}
+## shops - general store, department store, mall
+general_shops <- c("department_store", "general", "kiosk", "mall", "supermarket", "wholesale", "baby_goods", "bag", "boutique", "clothes", "fabric", "fashion_accessories", "jewelry", "leather", "sewing", "shoes", "tailor", "watches", "wool", "charity", "second_hand", "variety_store", "agrarian", "appliance", "bathroom_furnishing", "doityourself", "electrical", "energy", "fireplace", "florist", "garden_centre", "garden_furniture", "gas", "glaziery", "groundskeeping", "hardware", "houseware", "locksmith", "paint", "security", "trade", "antiques", "bed", "candles", "carpet", "curtain", "doors", "flooring", "furniture", "household_linen", "interior_decoration", "kitchen", "lighting", "tiles", "window_blind", "computer", "electronics", "hifi", "mobile_phone", "radiotechnics", "vacuum_cleaner", "anime", "books", "gift", "lottery", "newsagent", "stationery", "ticket", "bookmaker", "cannabis", "copyshop", "dry_cleaning", "e-cigarette", "funeral_directors", "laundry", "money_lender", "party", "pawnbroker", "pet", "pet_grooming", "pest_control", "pyrotechnics", "religion", "storage_rental", "tobacco", "toys", "travel_agency", "vacant", "weapons", "outpost", "user defined")
+sf_generalStore <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = "shop", 
+                              value_nm = general_shops, 
+                              type = "General store")
+```
+
+
+#### Healthcare
+```{r}
+## Healthcare
+sf_healthcare <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = "amenity", 
+                              value_nm = c("baby_hatch", "clinic", "dentist", "doctors", "hospital", "nursing_home", "pharmacy", "social_facility", "veterinary"), 
+                              type = "Healthcare & Beauty")
+
+sf_health <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = "shop", 
+                              value_nm = c("beauty", "chemist", "cosmetics", "erotic", "hairdresser", "hairdresser_supply", "hearing_aids", "herbalist", "message", "medical_supply", "nutrition_supplements", "optician", "perfumery", "tattoo"), 
+                              type = "Healthcare & Beauty")
+sf_healthcare <- bind_rows(sf_healthcare, sf_health)
+```
+
+
+#### Entertainment, art & culture
+```{r}
+## entertainment, art & culture
+sf_entertainment <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = "amenity", 
+                              value_nm = c("arts_centre", "brothel", "casino", "cinema", "community_centre", "conference_centre", "events_venue", "fountain", "gambling", "love_hotel", "nightclub", "planetarium", "public_bookcase", "social_centre", "stripclub", "studio", "swingerclub", "theatre"), 
+                              type = "Entertainment, art & culture")
+```
+
+
+```{r}
+## Education
+sf_education <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = "amenity", 
+                              value_nm = c("college", "driving_school", "kindergarten", "language_school", "library", "toy_library", "music_school", "school", "university"), 
+                              type = "Education")
+```
+
+#### Transportation
+```{r}
+## Transportation
+sf_transportation <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = "amenity", 
+                              value_nm = c("bicycle_parking", "bicycle_repair_station", "bicycle_rental", "boat_rental", "boat_sharing", "bus_station", "car_rental", "car_sharing", "car_wash", "vehicle_inspection", "charging_station", "ferry_terminal", "fuel", "grit_bin", "motorcycle_parking", "parking", "parking_entrance", "parking_space", "taxi"), 
+                              type = "Transportation")
+```
+
+
+#### Financial 
+```{r}
+## Financial 
+sf_financial <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = "amenity", 
+                              value_nm = c("atm", "bank", "bureau_de_change"), 
+                              type = "Financial")
+```
+
+#### Public service
+```{r}
+## public service
+sf_publicService <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776), 
+                              key_nm = "amenity", 
+                              value_nm = c("courthouse", "embassy", "fire_station", "police", "post_box", "post_office", "prison", "ranger_station", "townhall"), 
+                              type = "Public service")
+```
+
+#### Combined POIs
+```{r}
+full_pois <- bind_rows(sf_sustenance, sf_facilities, sf_generalStore, sf_healthcare, sf_entertainment, sf_education, sf_transportation, sf_financial, sf_publicService) %>% 
+  rename(POIs = poi)
+write_sf(full_pois, here::here("data/POIs/poi_points.shp"))
+```
+
+### Visualization 
+
+```{r}
+tm_shape(sf_queens_residential) + 
+  tm_lines() + 
+  tm_shape(full_pois) + 
+  tm_dots(col = "POIs", size = 0.05) + 
+  tm_layout(legend.outside = T)
+```
+
+
+### Assign POIs to streets 
+```{r}
+# create 5m buffer
+poi_buffers5m <- full_pois %>% st_buffer(., dist = 0.0005) 
+  
+tm_shape(poi_buffers5m) +
+  tm_polygons(border.col = "red") + 
+    tm_shape(full_pois) + 
+    tm_dots(col = "POIs") + 
+    tm_shape(sf_queens_residential) +
+    tm_lines(col = "blue") + 
+    tm_layout(legend.outside = T)
+```
+
+
+```{r}
+streets_with_POIs_queens2km <- sf_queens_residential %>% 
+  rownames_to_column(var = "id") %>% 
+  mutate(id = factor(id, levels = id)) %>% 
+  st_join(., poi_buffers5m) %>% 
+  mutate(POIs = if_else(is.na(POIs), 0, 1)) %>% 
+  group_by(id) %>%
+  dplyr::summarise(n_pois = sum(POIs) %>% as.integer(), 
+                   n_type = n_distinct(type)) %>% 
+  mutate(n_type = if_else(n_pois == 0, 0, as.numeric(n_type))) %>% 
+  left_join(., sf_queens_residential %>% st_set_geometry(NULL) %>% rownames_to_column(var = "id")) %>% 
+  dplyr::select(id, osmid, name, length, n_pois, n_type)
+
+write_sf(streets_with_POIs_queens2km, here::here("data/streets_with_POIs/streets_with_POIs_queens2km.shp"))
+```
+
