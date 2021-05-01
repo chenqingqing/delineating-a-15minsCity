@@ -18,6 +18,7 @@ library(dplyr)
 library(sf)
 library(tmap)
 library(osmdata)
+library(vegan) ##calculate diversity
 ```
 
 
@@ -162,15 +163,37 @@ sf_publicService <- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76776
 
 #### Combined POIs
 ```{r}
-full_pois <- bind_rows(sf_sustenance, sf_facilities, sf_generalStore, sf_healthcare, sf_entertainment, sf_education, sf_transportation, sf_financial, sf_publicService) %>% 
+full_pois <- bind_rows(sf_sustenance, sf_facilities, sf_generalStore, sf_healthcare, sf_entertainment, sf_education, sf_transportation, sf_financial, sf_publicService) %>%
   rename(POIs = poi)
 write_sf(full_pois, here::here("data/POIs/poi_points.shp"))
+
+full_pois %>% 
+  st_set_geometry(NULL) %>% 
+  group_by(POIs) %>% 
+  summarise(Count = n()) %>% 
+  ungroup() %>% 
+  mutate(POIs = stringr::str_to_title(POIs)) %>% 
+  gt::gt() 
+
+full_pois %>% 
+  st_set_geometry(NULL) %>% 
+  mutate(type = gsub("_", " ", type), 
+         type = stringr::str_to_title(type), 
+         POIs = stringr::str_to_title(POIs)) %>% 
+  group_by(POIs, type) %>% 
+  summarise(Count = n()) %>% 
+  gt::gt() %>% 
+  gt::cols_label(type = "Type of POIs")
 ```
 
 ### Visualization 
 
 ```{r}
-tm_shape(sf_queens_residential) + 
+sf_queens_2km_sub <- sf_queens_2km %>% 
+  filter(highway %in% c("primary", "primary_link", "tertiary", "tertiary_link", "secondary",  "secondary_link", "residential", "service"))
+
+# tm_shape(sf_queens_residential) + 
+tm_shape(sf_queens_2km_sub) + 
   tm_lines() + 
   tm_shape(full_pois) + 
   tm_dots(col = "POIs", size = 0.05) + 
@@ -180,32 +203,96 @@ tm_shape(sf_queens_residential) +
 
 ### Assign POIs to streets 
 ```{r}
+# https://epsg.io/3970
 # create 5m buffer
-poi_buffers5m <- full_pois %>% st_buffer(., dist = 0.0005) 
+poi_buffers50m <- full_pois %>% 
+  st_transform(crs = 3970) %>% 
+  st_buffer(., dist = 30) 
   
-tm_shape(poi_buffers5m) +
+tm_shape(poi_buffers50m) +
   tm_polygons(border.col = "red") + 
     tm_shape(full_pois) + 
     tm_dots(col = "POIs") + 
-    tm_shape(sf_queens_residential) +
-    tm_lines(col = "blue") + 
+    tm_shape(sf_queens_2km_sub) +
+    tm_lines(col = "black") + 
     tm_layout(legend.outside = T)
 ```
 
 
-```{r}
-streets_with_POIs_queens2km <- sf_queens_residential %>% 
-  rownames_to_column(var = "id") %>% 
-  mutate(id = factor(id, levels = id)) %>% 
-  st_join(., poi_buffers5m) %>% 
-  mutate(POIs = if_else(is.na(POIs), 0, 1)) %>% 
-  group_by(id) %>%
-  dplyr::summarise(n_pois = sum(POIs) %>% as.integer(), 
-                   n_type = n_distinct(type)) %>% 
-  mutate(n_type = if_else(n_pois == 0, 0, as.numeric(n_type))) %>% 
-  left_join(., sf_queens_residential %>% st_set_geometry(NULL) %>% rownames_to_column(var = "id")) %>% 
-  dplyr::select(id, osmid, name, length, n_pois, n_type)
+### Measure diversity of POIs
 
-write_sf(streets_with_POIs_queens2km, here::here("data/streets_with_POIs/streets_with_POIs_queens2km.shp"))
+```{r}
+if(file.exists(here::here("data/streets_with_POIs/streets_with_POIs_queens2km.shp"))){
+  streets_with_POIs_queens2km <- read_sf(here::here("data/streets_with_POIs/streets_with_POIs_queens2km.shp"))
+}else{
+  #intersect street with POIs
+  streets_with_POIs <-  sf_queens_2km_sub %>% 
+    st_transform(crs = 3970) %>% 
+    rownames_to_column(var = "id") %>% 
+    mutate(id = factor(id, levels = id)) %>% 
+    st_join(., poi_buffers50m) %>% 
+    mutate(POIs = if_else(is.na(POIs), 0, 1)) 
+
+  #calculate diversity based on shannon diversity
+  div_df <- streets_with_POIs %>% 
+      st_set_geometry(NULL) %>% 
+      dplyr::select(id, POIs, type) %>% 
+      filter(POIs != 0) %>% 
+      group_by(id, type) %>% 
+      dplyr::summarise(n = n()) %>% 
+      ungroup() %>% 
+      spread(., key = "type", value = "n") %>% 
+      replace(., is.na(.), 0) 
+  div_id <- div_df$id
+  div_shannon <- div_df %>% 
+      column_to_rownames(var = "id") %>%
+      diversity(index = "shannon") %>% 
+      as_tibble()
+  div_POIs <- tibble(id = id) %>% 
+      bind_cols(div_shannon) %>% 
+      rename(diversity = value)
+
+  # frequency of POIs
+  freq_POIs <- streets_with_POIs %>% 
+    group_by(id) %>%
+    dplyr::summarise(n_pois = sum(POIs) %>% as.integer(), 
+                     n_type = n_distinct(type)) %>% 
+    mutate(n_type = if_else(n_pois == 0, 0, as.numeric(n_type)))
+  
+  # join diversity to street sf object 
+  streets_with_POIs_queens2km <- freq_POIs %>% 
+    left_join(., div_POIs, by = c("id" = "id")) %>% 
+    mutate(diversity = case_when(
+      diversity >= 0 ~ diversity + 0.1,
+      TRUE ~ 0
+    )) %>% 
+    mutate(norm_diversity = (diversity - min(diversity))/(max(diversity) - min(diversity))) %>% 
+    left_join(., sf_queens_2km_sub %>% st_set_geometry(NULL) %>% rownames_to_column(var = "id") %>% 
+    dplyr::select(id, osmid, name, highway, length)) %>% 
+    dplyr::select(id, osmid, name, highway, length, n_pois, n_type, diversity, norm_diversity)
+    
+  # save to files 
+  write_sf(streets_with_POIs_queens2km %>% st_transform(crs = 4326), here::here("data/streets_with_POIs/streets_with_POIs_queens2km.shp"))
+}
 ```
+
+#### Visualization 
+
+```{r}
+t1 <- tm_shape(streets_with_POIs_queens2km) +
+  tm_lines(col = "norm_diversity", 
+           palette = "PuRd", 
+           n = 7) +
+  tm_layout(legend.outside = T)
+
+t2 <- tm_shape(streets_with_POIs_queens2km) +
+  tm_lines(col = "n_pois", 
+           palette = "PuRd", 
+           n = 7) +
+  tm_layout(legend.outside = T)
+
+tmap_arrange(t1, t2, ncol = 1)
+```
+
+
 
