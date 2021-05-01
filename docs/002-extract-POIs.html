@@ -287,7 +287,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Extract POIs</h1>
 <h4 class="author">Qingqing Chen</h4>
-<h4 class="date">15 April, 2021</h4>
+<h4 class="date">01 May, 2021</h4>
 
 </div>
 
@@ -312,7 +312,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-15
+<strong>Last updated:</strong> 2021-05-01
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -403,16 +403,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree2738ed7419be0a6dc07081bf310698ccb3124debtargetblank2738ed7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/2738ed7419be0a6dc07081bf310698ccb3124deb" target="_blank">2738ed7</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree69fa59da57b413547cd503494a14386384aa661btargetblank69fa59da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/69fa59da57b413547cd503494a14386384aa661b" target="_blank">69fa59d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree2738ed7419be0a6dc07081bf310698ccb3124debtargetblank2738ed7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree69fa59da57b413547cd503494a14386384aa661btargetblank69fa59da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/2738ed7419be0a6dc07081bf310698ccb3124deb" target="_blank">2738ed7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/69fa59da57b413547cd503494a14386384aa661b" target="_blank">69fa59d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -420,11 +420,18 @@ Note that you need to be careful to ensure that all relevant files for the analy
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    data/POIs/
-    Ignored:    data/queens1500m_street_networks/
-    Ignored:    data/queens2km_street_networks/
-    Ignored:    data/streets_with_POIs/
+    Ignored:    data/.DS_Store
+    Ignored:    model/.DS_Store
+    Ignored:    model/data/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/figure/
+
+Unstaged changes:
+    Modified:   data/POIs/poi_points.dbf
+    Modified:   data/streets_with_POIs/streets_with_POIs_queens2km.dbf
 
 </code></pre>
 <p>
@@ -463,6 +470,57 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/blob/69fa59da57b413547cd503494a14386384aa661b/analysis/002-extract-POIs.Rmd" target="_blank">69fa59d</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-05-01
+</td>
+<td>
+update plots
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/blob/f0a9e2e277939e5f48332b55b3786fc379771f9f/analysis/002-extract-POIs.Rmd" target="_blank">f0a9e2e</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-05-01
+</td>
+<td>
+add POIs diversity
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/chenqingqing/draw-15minsCity-bubbles/50aad4303581f1e5828476fde27e564da3ab7e70/docs/002-extract-POIs.html" target="_blank">50aad43</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-04-15
+</td>
+<td>
+add docs
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -608,46 +666,1144 @@ sf_publicService &lt;- extract_pois(bb = c(-73.82137, 40.73188, -73.77389, 40.76
 </div>
 <div id="combined-pois" class="section level4">
 <h4>Combined POIs</h4>
-<pre class="r"><code>full_pois &lt;- bind_rows(sf_sustenance, sf_facilities, sf_generalStore, sf_healthcare, sf_entertainment, sf_education, sf_transportation, sf_financial, sf_publicService) %&gt;% 
+<pre class="r"><code>full_pois &lt;- bind_rows(sf_sustenance, sf_facilities, sf_generalStore, sf_healthcare, sf_entertainment, sf_education, sf_transportation, sf_financial, sf_publicService) %&gt;%
   rename(POIs = poi)
-write_sf(full_pois, here::here(&quot;data/POIs/poi_points.shp&quot;))</code></pre>
+write_sf(full_pois, here::here(&quot;data/POIs/poi_points.shp&quot;))
+
+full_pois %&gt;% 
+  st_set_geometry(NULL) %&gt;% 
+  group_by(POIs) %&gt;% 
+  summarise(Count = n()) %&gt;% 
+  ungroup() %&gt;% 
+  mutate(POIs = stringr::str_to_title(POIs)) %&gt;% 
+  gt::gt() </code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#gurqhjtlfs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gurqhjtlfs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gurqhjtlfs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gurqhjtlfs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gurqhjtlfs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gurqhjtlfs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gurqhjtlfs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gurqhjtlfs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gurqhjtlfs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gurqhjtlfs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gurqhjtlfs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gurqhjtlfs .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gurqhjtlfs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gurqhjtlfs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gurqhjtlfs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gurqhjtlfs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gurqhjtlfs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#gurqhjtlfs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gurqhjtlfs .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#gurqhjtlfs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gurqhjtlfs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gurqhjtlfs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gurqhjtlfs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gurqhjtlfs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gurqhjtlfs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#gurqhjtlfs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gurqhjtlfs .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#gurqhjtlfs .gt_left {
+  text-align: left;
+}
+
+#gurqhjtlfs .gt_center {
+  text-align: center;
+}
+
+#gurqhjtlfs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gurqhjtlfs .gt_font_normal {
+  font-weight: normal;
+}
+
+#gurqhjtlfs .gt_font_bold {
+  font-weight: bold;
+}
+
+#gurqhjtlfs .gt_font_italic {
+  font-style: italic;
+}
+
+#gurqhjtlfs .gt_super {
+  font-size: 65%;
+}
+
+#gurqhjtlfs .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="gurqhjtlfs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">POIs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Count</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">Education</td>
+      <td class="gt_row gt_center">7</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Entertainment, Art &amp; Culture</td>
+      <td class="gt_row gt_center">3</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Facilities</td>
+      <td class="gt_row gt_center">20</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Financial</td>
+      <td class="gt_row gt_center">7</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">General Store</td>
+      <td class="gt_row gt_center">13</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Healthcare &amp; Beauty</td>
+      <td class="gt_row gt_center">9</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Public Service</td>
+      <td class="gt_row gt_center">43</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Sustenance</td>
+      <td class="gt_row gt_center">60</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Transportation</td>
+      <td class="gt_row gt_center">28</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+<pre class="r"><code>full_pois %&gt;% 
+  st_set_geometry(NULL) %&gt;% 
+  mutate(type = gsub(&quot;_&quot;, &quot; &quot;, type), 
+         type = stringr::str_to_title(type), 
+         POIs = stringr::str_to_title(POIs)) %&gt;% 
+  group_by(POIs, type) %&gt;% 
+  summarise(Count = n()) %&gt;% 
+  gt::gt() %&gt;% 
+  gt::cols_label(type = &quot;Type of POIs&quot;)</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#xnnnlptoeg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xnnnlptoeg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xnnnlptoeg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xnnnlptoeg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xnnnlptoeg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xnnnlptoeg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xnnnlptoeg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xnnnlptoeg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xnnnlptoeg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xnnnlptoeg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xnnnlptoeg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xnnnlptoeg .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xnnnlptoeg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xnnnlptoeg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xnnnlptoeg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xnnnlptoeg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xnnnlptoeg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#xnnnlptoeg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xnnnlptoeg .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#xnnnlptoeg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xnnnlptoeg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xnnnlptoeg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xnnnlptoeg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xnnnlptoeg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xnnnlptoeg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#xnnnlptoeg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xnnnlptoeg .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#xnnnlptoeg .gt_left {
+  text-align: left;
+}
+
+#xnnnlptoeg .gt_center {
+  text-align: center;
+}
+
+#xnnnlptoeg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xnnnlptoeg .gt_font_normal {
+  font-weight: normal;
+}
+
+#xnnnlptoeg .gt_font_bold {
+  font-weight: bold;
+}
+
+#xnnnlptoeg .gt_font_italic {
+  font-style: italic;
+}
+
+#xnnnlptoeg .gt_super {
+  font-size: 65%;
+}
+
+#xnnnlptoeg .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="xnnnlptoeg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Type of POIs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Count</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">Education</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Library</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">School</td>
+      <td class="gt_row gt_center">5</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">Entertainment, Art &amp; Culture</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Arts Centre</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Cinema</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Theatre</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">Facilities</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Bench</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Drinking Water</td>
+      <td class="gt_row gt_center">16</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Toilets</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">Financial</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Atm</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Bank</td>
+      <td class="gt_row gt_center">6</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">General Store</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Books</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Department Store</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Funeral Directors</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Hifi</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Pet</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Shoes</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Supermarket</td>
+      <td class="gt_row gt_center">5</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Vacant</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">Healthcare &amp; Beauty</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Beauty</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Chemist</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Cosmetics</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Dentist</td>
+      <td class="gt_row gt_center">4</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Doctors</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Hospital</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">Public Service</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Fire Station</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Post Box</td>
+      <td class="gt_row gt_center">40</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Post Office</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">Sustenance</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Alcohol</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Bakery</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Bar</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Butcher</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Cafe</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Convenience</td>
+      <td class="gt_row gt_center">4</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Deli</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Farm</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Fast Food</td>
+      <td class="gt_row gt_center">8</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Food Court</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Frozen Food</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Greengrocer</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Restaurant</td>
+      <td class="gt_row gt_center">36</td>
+    </tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="2" class="gt_group_heading">Transportation</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Bicycle Parking</td>
+      <td class="gt_row gt_center">16</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Car Wash</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Charging Station</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Fuel</td>
+      <td class="gt_row gt_center">6</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Parking</td>
+      <td class="gt_row gt_center">3</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 </div>
 </div>
 <div id="visualization" class="section level3">
 <h3>Visualization</h3>
-<pre class="r"><code>tm_shape(sf_queens_residential) + 
+<pre class="r"><code>sf_queens_2km_sub &lt;- sf_queens_2km %&gt;% 
+  filter(highway %in% c(&quot;primary&quot;, &quot;primary_link&quot;, &quot;tertiary&quot;, &quot;tertiary_link&quot;, &quot;secondary&quot;,  &quot;secondary_link&quot;, &quot;residential&quot;, &quot;service&quot;))
+
+# tm_shape(sf_queens_residential) + 
+tm_shape(sf_queens_2km_sub) + 
   tm_lines() + 
   tm_shape(full_pois) + 
   tm_dots(col = &quot;POIs&quot;, size = 0.05) + 
   tm_layout(legend.outside = T)</code></pre>
 <p><img src="figure/002-extract-POIs.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/blob/50aad4303581f1e5828476fde27e564da3ab7e70/docs/figure/002-extract-POIs.Rmd/unnamed-chunk-12-1.png" target="_blank">50aad43</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-04-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="assign-pois-to-streets" class="section level3">
 <h3>Assign POIs to streets</h3>
-<pre class="r"><code># create 5m buffer
-poi_buffers5m &lt;- full_pois %&gt;% st_buffer(., dist = 0.0005) 
+<pre class="r"><code># https://epsg.io/3970
+# create 5m buffer
+poi_buffers50m &lt;- full_pois %&gt;% 
+  st_transform(crs = 3970) %&gt;% 
+  st_buffer(., dist = 30) 
   
-tm_shape(poi_buffers5m) +
+tm_shape(poi_buffers50m) +
   tm_polygons(border.col = &quot;red&quot;) + 
     tm_shape(full_pois) + 
     tm_dots(col = &quot;POIs&quot;) + 
-    tm_shape(sf_queens_residential) +
-    tm_lines(col = &quot;blue&quot;) + 
+    tm_shape(sf_queens_2km_sub) +
+    tm_lines(col = &quot;black&quot;) + 
     tm_layout(legend.outside = T)</code></pre>
 <p><img src="figure/002-extract-POIs.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>streets_with_POIs_queens2km &lt;- sf_queens_residential %&gt;% 
-  rownames_to_column(var = &quot;id&quot;) %&gt;% 
-  mutate(id = factor(id, levels = id)) %&gt;% 
-  st_join(., poi_buffers5m) %&gt;% 
-  mutate(POIs = if_else(is.na(POIs), 0, 1)) %&gt;% 
-  group_by(id) %&gt;%
-  dplyr::summarise(n_pois = sum(POIs) %&gt;% as.integer(), 
-                   n_type = n_distinct(type)) %&gt;% 
-  mutate(n_type = if_else(n_pois == 0, 0, as.numeric(n_type))) %&gt;% 
-  left_join(., sf_queens_residential %&gt;% st_set_geometry(NULL) %&gt;% rownames_to_column(var = &quot;id&quot;)) %&gt;% 
-  dplyr::select(id, osmid, name, length, n_pois, n_type)
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/blob/50aad4303581f1e5828476fde27e564da3ab7e70/docs/figure/002-extract-POIs.Rmd/unnamed-chunk-13-1.png" target="_blank">50aad43</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-04-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="measure-diversity-of-pois" class="section level3">
+<h3>Measure diversity of POIs</h3>
+<pre class="r"><code>if(file.exists(here::here(&quot;data/streets_with_POIs/streets_with_POIs_queens2km.shp&quot;))){
+  streets_with_POIs_queens2km &lt;- read_sf(here::here(&quot;data/streets_with_POIs/streets_with_POIs_queens2km.shp&quot;))
+}else{
+  #intersect street with POIs
+  streets_with_POIs &lt;-  sf_queens_2km_sub %&gt;% 
+    st_transform(crs = 3970) %&gt;% 
+    rownames_to_column(var = &quot;id&quot;) %&gt;% 
+    mutate(id = factor(id, levels = id)) %&gt;% 
+    st_join(., poi_buffers50m) %&gt;% 
+    mutate(POIs = if_else(is.na(POIs), 0, 1)) 
 
-write_sf(streets_with_POIs_queens2km, here::here(&quot;data/streets_with_POIs/streets_with_POIs_queens2km.shp&quot;))</code></pre>
+  #calculate diversity based on shannon diversity
+  div_df &lt;- streets_with_POIs %&gt;% 
+      st_set_geometry(NULL) %&gt;% 
+      dplyr::select(id, POIs, type) %&gt;% 
+      filter(POIs != 0) %&gt;% 
+      group_by(id, type) %&gt;% 
+      dplyr::summarise(n = n()) %&gt;% 
+      ungroup() %&gt;% 
+      spread(., key = &quot;type&quot;, value = &quot;n&quot;) %&gt;% 
+      replace(., is.na(.), 0) 
+  div_id &lt;- div_df$id
+  div_shannon &lt;- div_df %&gt;% 
+      column_to_rownames(var = &quot;id&quot;) %&gt;%
+      diversity(index = &quot;shannon&quot;) %&gt;% 
+      as_tibble()
+  div_POIs &lt;- tibble(id = id) %&gt;% 
+      bind_cols(div_shannon) %&gt;% 
+      rename(diversity = value)
+
+  # frequency of POIs
+  freq_POIs &lt;- streets_with_POIs %&gt;% 
+    group_by(id) %&gt;%
+    dplyr::summarise(n_pois = sum(POIs) %&gt;% as.integer(), 
+                     n_type = n_distinct(type)) %&gt;% 
+    mutate(n_type = if_else(n_pois == 0, 0, as.numeric(n_type)))
+  
+  # join diversity to street sf object 
+  streets_with_POIs_queens2km &lt;- freq_POIs %&gt;% 
+    left_join(., div_POIs, by = c(&quot;id&quot; = &quot;id&quot;)) %&gt;% 
+    mutate(diversity = case_when(
+      diversity &gt;= 0 ~ diversity + 0.1,
+      TRUE ~ 0
+    )) %&gt;% 
+    mutate(norm_diversity = (diversity - min(diversity))/(max(diversity) - min(diversity)), 
+           norm_diversity = round(norm_diversity, 2)) %&gt;% 
+    left_join(., sf_queens_2km_sub %&gt;% st_set_geometry(NULL) %&gt;% rownames_to_column(var = &quot;id&quot;) %&gt;% 
+    dplyr::select(id, osmid, name, highway, length)) %&gt;% 
+    dplyr::select(id, osmid, name, highway, length, n_pois, n_type, diversity, norm_diversity) 
+    
+  # save to files 
+  write_sf(streets_with_POIs_queens2km %&gt;% st_transform(crs = 4326), here::here(&quot;data/streets_with_POIs/streets_with_POIs_queens2km.shp&quot;))
+}</code></pre>
+<div id="visualization-1" class="section level4">
+<h4>Visualization</h4>
+<pre class="r"><code>t1 &lt;- tm_shape(streets_with_POIs_queens2km) +
+  tm_lines(col = &quot;nrm_dvr&quot;, 
+           palette = &quot;PuRd&quot;, 
+           n = 7) +
+  tm_layout(legend.outside = T)
+
+t2 &lt;- tm_shape(streets_with_POIs_queens2km) +
+  tm_lines(col = &quot;n_pois&quot;, 
+           palette = &quot;PuRd&quot;, 
+           n = 7) +
+  tm_layout(legend.outside = T)
+
+tmap_arrange(t1, t2, ncol = 1)</code></pre>
+<p><img src="figure/002-extract-POIs.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -671,34 +1827,37 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] osmdata_0.1.4   tmap_3.3-1      sf_0.9-7        forcats_0.5.1  
- [5] stringr_1.4.0   dplyr_1.0.5     purrr_0.3.4     readr_1.4.0    
- [9] tidyr_1.1.3     tibble_3.1.0    ggplot2_3.3.3   tidyverse_1.3.0
-[13] here_1.0.1     
+ [1] vegan_2.5-7     lattice_0.20-41 permute_0.9-5   osmdata_0.1.4  
+ [5] tmap_3.3-1      sf_0.9-7        forcats_0.5.1   stringr_1.4.0  
+ [9] dplyr_1.0.5     purrr_0.3.4     readr_1.4.0     tidyr_1.1.3    
+[13] tibble_3.1.0    ggplot2_3.3.3   tidyverse_1.3.0 here_1.0.1     
 
 loaded via a namespace (and not attached):
- [1] fs_1.5.0           lubridate_1.7.10   RColorBrewer_1.1-2 httr_1.4.2        
- [5] rprojroot_2.0.2    tools_4.0.4        backports_1.2.1    bslib_0.2.4       
- [9] utf8_1.1.4         R6_2.5.0           KernSmooth_2.23-18 DBI_1.1.1         
-[13] colorspace_2.0-0   raster_3.4-5       sp_1.4-5           withr_2.4.1       
-[17] tidyselect_1.1.0   leaflet_2.0.4.1    curl_4.3           compiler_4.0.4    
-[21] git2r_0.28.0       leafem_0.1.3       cli_2.3.1          rvest_0.3.6       
-[25] xml2_1.3.2         sass_0.3.1         scales_1.1.1       classInt_0.4-3    
-[29] digest_0.6.27      rmarkdown_2.7      base64enc_0.1-3    dichromat_2.0-0   
-[33] pkgconfig_2.0.3    htmltools_0.5.1.1  highr_0.8          dbplyr_2.1.0      
-[37] htmlwidgets_1.5.3  rlang_0.4.10       readxl_1.3.1       rstudioapi_0.13   
-[41] jquerylib_0.1.3    generics_0.1.0     jsonlite_1.7.2     crosstalk_1.1.1   
-[45] magrittr_2.0.1     Rcpp_1.0.6         munsell_0.5.0      fansi_0.4.2       
-[49] abind_1.4-5        lifecycle_1.0.0    stringi_1.5.3      leafsync_0.1.0    
-[53] whisker_0.4        yaml_2.2.1         tmaptools_3.1-1    grid_4.0.4        
-[57] parallel_4.0.4     promises_1.2.0.1   crayon_1.4.1       lattice_0.20-41   
-[61] stars_0.5-1        haven_2.3.1        hms_1.0.0          knitr_1.31        
-[65] pillar_1.5.1       codetools_0.2-18   reprex_1.0.0       XML_3.99-0.5      
-[69] glue_1.4.2         evaluate_0.14      modelr_0.1.8       vctrs_0.3.6       
-[73] png_0.1-7          httpuv_1.5.5       cellranger_1.1.0   gtable_0.3.0      
-[77] assertthat_0.2.1   xfun_0.21          lwgeom_0.2-5       broom_0.7.5       
-[81] e1071_1.7-4        later_1.1.0.1      class_7.3-18       viridisLite_0.3.0 
-[85] workflowr_1.6.2    units_0.6-7        ellipsis_0.3.1    </code></pre>
+ [1] nlme_3.1-152       fs_1.5.0           lubridate_1.7.10   RColorBrewer_1.1-2
+ [5] httr_1.4.2         rprojroot_2.0.2    tools_4.0.4        backports_1.2.1   
+ [9] bslib_0.2.4        utf8_1.1.4         R6_2.5.0           KernSmooth_2.23-18
+[13] mgcv_1.8-33        DBI_1.1.1          colorspace_2.0-0   raster_3.4-5      
+[17] sp_1.4-5           withr_2.4.1        tidyselect_1.1.0   leaflet_2.0.4.1   
+[21] curl_4.3           compiler_4.0.4     git2r_0.28.0       leafem_0.1.3      
+[25] cli_2.3.1          rvest_0.3.6        gt_0.2.2           xml2_1.3.2        
+[29] sass_0.3.1         checkmate_2.0.0    scales_1.1.1       classInt_0.4-3    
+[33] digest_0.6.27      rmarkdown_2.7      base64enc_0.1-3    dichromat_2.0-0   
+[37] pkgconfig_2.0.3    htmltools_0.5.1.1  highr_0.8          dbplyr_2.1.0      
+[41] htmlwidgets_1.5.3  rlang_0.4.10       readxl_1.3.1       rstudioapi_0.13   
+[45] jquerylib_0.1.3    generics_0.1.0     jsonlite_1.7.2     crosstalk_1.1.1   
+[49] magrittr_2.0.1     Matrix_1.3-2       Rcpp_1.0.6         munsell_0.5.0     
+[53] fansi_0.4.2        abind_1.4-5        lifecycle_1.0.0    stringi_1.5.3     
+[57] leafsync_0.1.0     whisker_0.4        yaml_2.2.1         MASS_7.3-53       
+[61] tmaptools_3.1-1    grid_4.0.4         parallel_4.0.4     promises_1.2.0.1  
+[65] crayon_1.4.1       splines_4.0.4      stars_0.5-1        haven_2.3.1       
+[69] hms_1.0.0          knitr_1.31         pillar_1.5.1       codetools_0.2-18  
+[73] reprex_1.0.0       XML_3.99-0.5       glue_1.4.2         evaluate_0.14     
+[77] modelr_0.1.8       vctrs_0.3.6        png_0.1-7          httpuv_1.5.5      
+[81] cellranger_1.1.0   gtable_0.3.0       assertthat_0.2.1   xfun_0.21         
+[85] lwgeom_0.2-5       broom_0.7.5        e1071_1.7-4        later_1.1.0.1     
+[89] class_7.3-18       viridisLite_0.3.0  cluster_2.1.0      workflowr_1.6.2   
+[93] units_0.6-7        ellipsis_0.3.1    </code></pre>
+</div>
 </div>
 </div>
 

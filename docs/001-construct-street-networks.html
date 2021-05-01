@@ -287,7 +287,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Construct street networks</h1>
 <h4 class="author">Qingqing Chen</h4>
-<h4 class="date">14 April, 2021</h4>
+<h4 class="date">01 May, 2021</h4>
 
 </div>
 
@@ -312,7 +312,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-14
+<strong>Last updated:</strong> 2021-05-01
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -403,16 +403,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree3f61c42a8eda20bef9211803f9e3b72cba7d836ftargetblank3f61c42a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/3f61c42a8eda20bef9211803f9e3b72cba7d836f" target="_blank">3f61c42</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestreece5bc2dec67a13e9fb90ab166104288757d53900targetblankce5bc2da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/ce5bc2dec67a13e9fb90ab166104288757d53900" target="_blank">ce5bc2d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree3f61c42a8eda20bef9211803f9e3b72cba7d836ftargetblank3f61c42a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestreece5bc2dec67a13e9fb90ab166104288757d53900targetblankce5bc2da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/3f61c42a8eda20bef9211803f9e3b72cba7d836f" target="_blank">3f61c42</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/ce5bc2dec67a13e9fb90ab166104288757d53900" target="_blank">ce5bc2d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -420,15 +420,22 @@ Note that you need to be careful to ensure that all relevant files for the analy
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
 
 Untracked files:
-    Untracked:  data/queens1500m_street_networks/
-    Untracked:  data/queens2km_street_networks/
+    Untracked:  data/streets_with_POIs/streets_with_POIs_queens2km2.dbf
+    Untracked:  data/streets_with_POIs/streets_with_POIs_queens2km2.prj
+    Untracked:  data/streets_with_POIs/streets_with_POIs_queens2km2.shp
+    Untracked:  data/streets_with_POIs/streets_with_POIs_queens2km2.shx
 
 Unstaged changes:
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/002-extract-POIs.Rmd
+    Modified:   data/POIs/poi_points.dbf
+    Modified:   data/streets_with_POIs/streets_with_POIs_queens2km.dbf
+    Modified:   data/streets_with_POIs/streets_with_POIs_queens2km.shp
+    Modified:   data/streets_with_POIs/streets_with_POIs_queens2km.shx
 
 </code></pre>
 <p>
@@ -467,6 +474,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/blob/ce5bc2dec67a13e9fb90ab166104288757d53900/analysis/001-construct-street-networks.Rmd" target="_blank">ce5bc2d</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-05-01
+</td>
+<td>
+update street lines
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/chenqingqing/draw-15minsCity-bubbles/50aad4303581f1e5828476fde27e564da3ab7e70/docs/001-construct-street-networks.html" target="_blank">50aad43</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-04-15
+</td>
+<td>
+add docs
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -527,16 +568,56 @@ ox.io.save_graph_shapefile(queens, filepath=&quot;../data/interim/street-network
 <pre class="r"><code>##load data
 sf_queens_2km &lt;- read_sf(here(&quot;data/queens2km_street_networks/edges.shp&quot;))
 ## only keep residential streets 
-sf_queens_residential &lt;- sf_queens_2km %&gt;% 
-  filter(highway == &quot;residential&quot;) %&gt;% 
-  dplyr::select(osmid, name, length)
+# sf_queens_residential &lt;- sf_queens_2km %&gt;% 
+#   filter(highway == &quot;residential&quot;) %&gt;% 
+#   dplyr::select(osmid, name, length)
 
-tm_shape(sf_queens_residential) + 
+sf_queens_2km_sub &lt;- sf_queens_2km %&gt;% 
+  filter(highway %in% c(&quot;primary&quot;, &quot;primary_link&quot;, &quot;tertiary&quot;, &quot;tertiary_link&quot;, &quot;secondary&quot;,  &quot;secondary_link&quot;, &quot;residential&quot;, &quot;service&quot;))
+
+tm_shape(sf_queens_2km_sub) + 
   tm_lines(col = &quot;blue&quot;, lwd = 1.5) +
   tm_layout(frame = F) +
   tm_credits(&quot;Residential street networks of Queens, New York City (2km from geographical center)&quot;, 
               position = c(&quot;left&quot;, &quot;bottom&quot;))</code></pre>
 <p><img src="figure/001-construct-street-networks.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/blob/50aad4303581f1e5828476fde27e564da3ab7e70/docs/figure/001-construct-street-networks.Rmd/unnamed-chunk-2-1.png" target="_blank">50aad43</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-04-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
