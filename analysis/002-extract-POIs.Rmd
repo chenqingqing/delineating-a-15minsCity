@@ -266,10 +266,11 @@ if(file.exists(here::here("data/streets_with_POIs/streets_with_POIs_queens2km.sh
       diversity >= 0 ~ diversity + 0.1,
       TRUE ~ 0
     )) %>% 
-    mutate(norm_diversity = (diversity - min(diversity))/(max(diversity) - min(diversity))) %>% 
+    mutate(norm_diversity = (diversity - min(diversity))/(max(diversity) - min(diversity)), 
+           norm_diversity = round(norm_diversity, 2)) %>% 
     left_join(., sf_queens_2km_sub %>% st_set_geometry(NULL) %>% rownames_to_column(var = "id") %>% 
     dplyr::select(id, osmid, name, highway, length)) %>% 
-    dplyr::select(id, osmid, name, highway, length, n_pois, n_type, diversity, norm_diversity)
+    dplyr::select(id, osmid, name, highway, length, n_pois, n_type, diversity, norm_diversity) 
     
   # save to files 
   write_sf(streets_with_POIs_queens2km %>% st_transform(crs = 4326), here::here("data/streets_with_POIs/streets_with_POIs_queens2km.shp"))
@@ -280,7 +281,7 @@ if(file.exists(here::here("data/streets_with_POIs/streets_with_POIs_queens2km.sh
 
 ```{r}
 t1 <- tm_shape(streets_with_POIs_queens2km) +
-  tm_lines(col = "norm_diversity", 
+  tm_lines(col = "nrm_dvr", 
            palette = "PuRd", 
            n = 7) +
   tm_layout(legend.outside = T)
