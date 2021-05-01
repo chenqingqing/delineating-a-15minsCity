@@ -40,14 +40,16 @@ ox.io.save_graph_shapefile(queens, filepath="../data/interim/street-network", en
 ##load data
 sf_queens_2km <- read_sf(here("data/queens2km_street_networks/edges.shp"))
 ## only keep residential streets 
-sf_queens_residential <- sf_queens_2km %>% 
-  filter(highway == "residential") %>% 
-  dplyr::select(osmid, name, length)
+# sf_queens_residential <- sf_queens_2km %>% 
+#   filter(highway == "residential") %>% 
+#   dplyr::select(osmid, name, length)
 
-tm_shape(sf_queens_residential) + 
+sf_queens_2km_sub <- sf_queens_2km %>% 
+  filter(highway %in% c("primary", "primary_link", "tertiary", "tertiary_link", "secondary",  "secondary_link", "residential", "service"))
+
+tm_shape(sf_queens_2km_sub) + 
   tm_lines(col = "blue", lwd = 1.5) +
   tm_layout(frame = F) +
   tm_credits("Residential street networks of Queens, New York City (2km from geographical center)", 
               position = c("left", "bottom"))
 ```
-
