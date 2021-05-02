@@ -196,7 +196,7 @@ sf_queens_2km_sub <- sf_queens_2km %>%
 tm_shape(sf_queens_2km_sub) + 
   tm_lines() + 
   tm_shape(full_pois) + 
-  tm_dots(col = "POIs", size = 0.05) + 
+  tm_dots(col = "POIs", size = 0.05, jitter = 0.05) + 
   tm_layout(legend.outside = T)
 ```
 
