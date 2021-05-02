@@ -46,10 +46,23 @@ sf_queens_2km <- read_sf(here("data/queens2km_street_networks/edges.shp"))
 
 sf_queens_2km_sub <- sf_queens_2km %>% 
   filter(highway %in% c("primary", "primary_link", "tertiary", "tertiary_link", "secondary",  "secondary_link", "residential", "service"))
+```
 
-tm_shape(sf_queens_2km_sub) + 
-  tm_lines(col = "blue", lwd = 1.5) +
+#### Original street networks
+```{r}
+tm_shape(sf_queens_2km) + 
+  tm_lines(col = "black", lwd = 1.5) +
   tm_layout(frame = F) +
   tm_credits("Residential street networks of Queens, New York City (2km from geographical center)", 
               position = c("left", "bottom"))
 ```
+
+#### Simplified street networks 
+```{r}
+tm_shape(sf_queens_2km_sub) + 
+  tm_lines(col = "black", lwd = 1.5) +
+  tm_layout(frame = F) +
+  tm_credits("Residential street networks of Queens, New York City (2km from geographical center)", 
+              position = c("left", "bottom"))
+```
+
