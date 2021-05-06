@@ -18,3 +18,4 @@ body {text-align: justify}
 
 - [Chapter 1: Construct street networks](001-construct-street-networks.html)
 - [Chapter 2: Extract POIs](002-extract-POIs.html)
+- [Chapter 3: Model presentation](model-presentation.pdf)
