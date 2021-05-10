@@ -12,13 +12,34 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+library(png)
+library(grid)
 ```
 
 
-### Model GUI
+## Model study area
+
 ```{r}
-library(png)
-library(grid)
+study_area <- readPNG(here::here("data/pic/study-area.png"))
+grid.raster(study_area)
+```
+
+
+## Model Structure 
+```{r}
+structure <- readPNG(here::here("data/pic/model-structure.png"))
+grid.raster(structure)
+```
+
+## Agents decision-making process
+
+```{r}
+decision_tree <- readPNG(here::here("data/pic/decision_tree.png"))
+grid.raster(decision_tree)
+```
+
+## Model GUI
+```{r}
 gui <- readPNG(here::here("data/pic/gui.png"))
 grid.raster(gui)
 ```
