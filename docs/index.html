@@ -297,7 +297,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-06
+<strong>Last updated:</strong> 2021-05-10
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -328,16 +328,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree8c0d20902b590eb6b62243e5dae4818f71f9c6f2targetblank8c0d209a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/8c0d20902b590eb6b62243e5dae4818f71f9c6f2" target="_blank">8c0d209</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree510c5d2116ef470b082dfae80d13c43e9f5dfe63targetblank510c5d2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/510c5d2116ef470b082dfae80d13c43e9f5dfe63" target="_blank">510c5d2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree8c0d20902b590eb6b62243e5dae4818f71f9c6f2targetblank8c0d209a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree510c5d2116ef470b082dfae80d13c43e9f5dfe63targetblank510c5d2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/8c0d20902b590eb6b62243e5dae4818f71f9c6f2" target="_blank">8c0d209</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/510c5d2116ef470b082dfae80d13c43e9f5dfe63" target="_blank">510c5d2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -350,6 +350,12 @@ Ignored files:
     Ignored:    data/.DS_Store
     Ignored:    model/.DS_Store
     Ignored:    model/data/.DS_Store
+
+Untracked files:
+    Untracked:  data/pic/
+
+Unstaged changes:
+    Modified:   data/POIs/poi_points.dbf
 
 </code></pre>
 <p>
@@ -388,6 +394,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/blob/510c5d2116ef470b082dfae80d13c43e9f5dfe63/analysis/index.Rmd" target="_blank">510c5d2</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-05-10
+</td>
+<td>
+update outline
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/chenqingqing/draw-15minsCity-bubbles/8397a42c0d0e42aa68231456bbdc8c9b78b8d784/docs/index.html" target="_blank">8397a42</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-05-06
+</td>
+<td>
+upate doc
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -517,14 +557,15 @@ Start workflowr project.
 <style>
 body {text-align: justify}
 </style>
-<div id="drawing-the-15-minute-city-bubble-crowd-simulation-to-detect-the-size-of-community-life-circle-in-new-york-city" class="section level2">
-<h2>Drawing the ‘15-minute City’ Bubble: Crowd simulation to detect the size of community-life circle in New York City</h2>
+<div id="drawing-the-15-minute-city-bubble-crowd-simulation-to-detect-the-size-of-local-community-life-circle-in-new-york-city" class="section level2">
+<h2>Drawing the ‘15-minute City’ Bubble: Crowd simulation to detect the size of local community-life circle in New York City</h2>
 <div id="contents" class="section level3">
 <h3>Contents</h3>
 <ul>
 <li><a href="001-construct-street-networks.html">Chapter 1: Construct street networks</a></li>
 <li><a href="002-extract-POIs.html">Chapter 2: Extract POIs</a></li>
-<li><a href="model-presentation.pdf">Chapter 3: Model presentation</a></li>
+<li><a href="003-model-development.html">Chapter 3: Model development</a></li>
+<li><a href="model-presentation-slides.pdf">Chapter 4: Model presentation</a></li>
 </ul>
 </div>
 </div>

@@ -30,6 +30,7 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -225,6 +226,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -270,6 +274,14 @@ $(document).ready(function () {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">About</h1>
@@ -297,10 +309,10 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-14
+<strong>Last updated:</strong> 2021-05-10
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>draw-15minsCity-bubbles/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -328,26 +340,94 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree7ae659db912459c1ceaa855f0c312f72b4d64e49targetblank7ae659da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/7ae659db912459c1ceaa855f0c312f72b4d64e49" target="_blank">7ae659d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree7ae659db912459c1ceaa855f0c312f72b4d64e49targetblank7ae659da" class="panel-collapse collapse">
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20210414code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20210414)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20210414code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20210414)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree510c5d2116ef470b082dfae80d13c43e9f5dfe63targetblank510c5d2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/510c5d2116ef470b082dfae80d13c43e9f5dfe63" target="_blank">510c5d2</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomchenqingqingdraw15minsCitybubblestree510c5d2116ef470b082dfae80d13c43e9f5dfe63targetblank510c5d2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/7ae659db912459c1ceaa855f0c312f72b4d64e49" target="_blank">7ae659d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/510c5d2116ef470b082dfae80d13c43e9f5dfe63" target="_blank">510c5d2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    data/.DS_Store
+    Ignored:    model/.DS_Store
+    Ignored:    model/data/.DS_Store
+
+Untracked files:
+    Untracked:  data/pic/
 
 Unstaged changes:
-    Modified:   analysis/_site.yml
+    Modified:   data/POIs/poi_points.dbf
 
 </code></pre>
 <p>
@@ -386,6 +466,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/chenqingqing/draw-15minsCity-bubbles/blob/510c5d2116ef470b082dfae80d13c43e9f5dfe63/analysis/about.Rmd" target="_blank">510c5d2</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-05-10
+</td>
+<td>
+update outline
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/chenqingqing/draw-15minsCity-bubbles/50aad4303581f1e5828476fde27e564da3ab7e70/docs/about.html" target="_blank">50aad43</a>
+</td>
+<td>
+chenqingqing
+</td>
+<td>
+2021-04-15
+</td>
+<td>
+add docs
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -430,18 +544,23 @@ Start workflowr project.
 <style>
 body {text-align: justify}
 </style>
-<div id="drawing-the-15-minute-city-bubble-crowd-simulation-to-detect-the-size-of-community-life-circle-in-new-york-city" class="section level2">
-<h2>Drawing the ‘15-minute City’ Bubble: Crowd simulation to detect the size of community-life circle in New York City</h2>
+<div id="drawing-the-15-minute-city-bubble-crowd-simulation-to-detect-the-size-of-local-community-life-circle-in-new-york-city" class="section level2">
+<h2>Drawing the ‘15-minute City’ Bubble: Crowd simulation to detect the size of local community-life circle in New York City</h2>
 <p>The recent uptake of ’15-minute city’ planning ideas sought after by cities around the world (Weng et al. 2019, Pozoukidou and Chatziyiannaki 2021) refers to the idea that all residents can access most of their daily needs (e.g., groceries, work, education, shopping, health, exercise, entertainment, etc.) within 15 minutes (up to 20 minutes), commuting from their own doorsteps by walking, cycling, or public transportation. This notion has been sharply discussed lately during the Covid-19 pandemic, as the pandemic has significantly restricted human movement, forcing people to stay at home and only go out for basic needs (Dinah Lewis Boucher, 2020). Thus, ushering in a new era of integrated urban fabric which combines most of residents’ life essentials to each local community is promoted.</p>
-<p>However, when the concept of ‘15-minute city’ and the history of urban inequity (Duncan et al. 2012, Douglas S.Massey 2001) encounter, challenges of implementing the idea arise and the challenges could vary from different countries in different places (Feargus O’Sullivan, 2021). For example, people who stay in New York may be able to gain most of their daily needs within 15-minute traveling, while people who live in the small and midsized cities may require more time to get their essentials. So,</p>
+<p>However, when taking the history of urban inequity (Duncan et al. 2012, Stephens 2012) into account, challenges of implementing the concept of ‘15-minute city’ arise and the challenges could vary from different countries in different places. For instance, people who stay in New York City may be able to gain most of their daily needs within 15-minute traveling, while people who live in the small and midsized cities may require more time to get their essentials, especially where there is a lack of public transports. So,</p>
 <ul>
-<li>What is the size of a 15-minute city or a community-life bubble (which is referred to as ‘the bubble’ in the remainder of the paper) within a travel distance of 15 minutes by different traveling modes (e.g., walking, cycling, etc.)?</li>
-<li>How much the size of bubble varies between different places?</li>
-<li>How is the expanding rate of the bubble size when people traveling during the 15 minutes?</li>
-<li>Does the expanding rate drop dramatically or retain increasing after 15 minutes? If the expanding rate reach plateau before 15 minutes, does that mean residents can get their needs in a smaller area?</li>
-<li>What could be the potential factors that affect the size of the bubble?</li>
+<li>what is the exact size of a 15-minute city?</li>
+<li>How much does the size vary from diverse traveling modes (e.g., walking, cycling, or driving)?</li>
+<li>How much does the size fluctuate between different places within a city or across countries?</li>
+<li>Does the size reach a plateau before 15 minutes of traveling?</li>
+<li>If it does, does that indicates people could obtain their essentials in a shorter distance?</li>
 </ul>
-<p>The benchmark of quantifying a 15-minute city has not come with a consensus in the current state-of-the-art. It is at this junction, we spatiotemporally simulate residential movement on streets from the bottom-up by developing an agent-based model to quantitatively draw the bubble of a city. In this study, we take New York City as the case study and apply the model to the five boroughs. We hope the study could be helpful for detecting the flexibility of defining a ’15-minute city’ and for investigating the potential factors that affect its definition.</p>
+<p>The benchmark of quantifying a 15-minute city has not come with a consensus in the current state-of-the-art. In order to quantitatively draw the size of a 15-minute city, I spatiotemporally simulate residential movements on streets by developing an Agent-Based Model (ABM). I hope the bottom-up approach introduced in this study could help detect the flexibility of defining a ‘15-minute city’ and thereafter help investigate the underlying factors that affect its definition. The model is put to the test in application to a 4 by 4-kilometer square neighbourhood in Queens, which is located in the easternmost of New York. According to NY.gov, Queens is the largest in the area and the second-most in the population of the five boroughs of New York City, known for its diverse culture and diversified economy, and attracts people all over the world. It might be interesting to reimagine what the neighbourhood could look like in this ‘cornucopia’ as a 15-minute city model.</p>
+<pre class="r"><code>library(png)
+library(grid)
+study_area &lt;- readPNG(here::here(&quot;data/pic/study-area.png&quot;))
+grid.raster(study_area)</code></pre>
+<p><img src="figure/about.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="reference" class="section level3">
 <h3>Reference</h3>
 <p>Aziz, H.M.A., Park, B.H., Morton, A., Stewart, R.N., Hilliard, M., and Maness, M., 2018. A high resolution agent-based model to support walk-bicycle infrastructure investment decisions: A case study with New York City. Transportation Research Part C: Emerging Technologies, 86, 280–299.</p>
@@ -465,6 +584,44 @@ body {text-align: justify}
 <p>Whitworth, A., 2020. synthACS: Spatial MicroSimulation Modeling with Synthetic American Community Survey Data [online]. Available from: /paper/synthACS%3A-Spatial-MicroSimulation-Modeling-with-Whitworth/2bf10b9bd67fdc46d2372416a4f1367ff8f45832 [Accessed 22 Mar 2021].</p>
 <p>Yang, Y., Roux, A.V.D., Auchincloss, A.H., Rodriguez, D.A., and Brown, D.G., 2011. A Spatial Agent-Based Model for the Simulation of Adults’ Daily Walking Within a City. American Journal of Preventive Medicine, 40 (3), 353–361.</p>
 <p>Zhu, W., Nedovic-Budic, Z., Olshansky, R.B., Marti, J., Gao, Y., Park, Y., McAuley, E., and Chodzko-Zajko, W., 2013. Agent-Based Modeling of Physical Activity Behavior and Environmental Correlations: An Introduction and Illustration. Journal of Physical Activity and Health, 10 (3), 309–322.</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.4 (2021-02-15)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] grid      stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+[1] png_0.1-7
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.6        whisker_0.4       knitr_1.31        magrittr_2.0.1   
+ [5] workflowr_1.6.2   here_1.0.1        R6_2.5.0          rlang_0.4.10     
+ [9] fansi_0.4.2       highr_0.8         stringr_1.4.0     tools_4.0.4      
+[13] xfun_0.21         utf8_1.1.4        git2r_0.28.0      jquerylib_0.1.3  
+[17] htmltools_0.5.1.1 ellipsis_0.3.1    rprojroot_2.0.2   yaml_2.2.1       
+[21] digest_0.6.27     tibble_3.1.0      lifecycle_1.0.0   crayon_1.4.1     
+[25] later_1.1.0.1     sass_0.3.1        vctrs_0.3.6       promises_1.2.0.1 
+[29] fs_1.5.0          glue_1.4.2        evaluate_0.14     rmarkdown_2.7    
+[33] stringi_1.5.3     compiler_4.0.4    bslib_0.2.4       pillar_1.5.1     
+[37] jsonlite_1.7.2    httpuv_1.5.5      pkgconfig_2.0.3  </code></pre>
+</div>
 </div>
 </div>
 
@@ -515,6 +672,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
