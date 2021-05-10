@@ -19,6 +19,7 @@ library(sf)
 library(tmap)
 library(osmdata)
 library(vegan) ##calculate diversity
+library(ggspatial)
 ```
 
 
@@ -193,11 +194,28 @@ sf_queens_2km_sub <- sf_queens_2km %>%
   filter(highway %in% c("primary", "primary_link", "tertiary", "tertiary_link", "secondary",  "secondary_link", "residential", "service"))
 
 # tm_shape(sf_queens_residential) + 
-tm_shape(sf_queens_2km_sub) + 
-  tm_lines() + 
-  tm_shape(full_pois) + 
-  tm_dots(col = "POIs", size = 0.05, jitter = 0.05) + 
-  tm_layout(legend.outside = T)
+# tm_shape(sf_queens_2km_sub) + 
+#   tm_lines() + 
+#   tm_shape(full_pois) + 
+#   tm_dots(col = "POIs", size = 0.05, jitter = 0.05) + 
+#   tm_layout(legend.outside = T)
+
+
+ggplot() +
+  geom_sf(data = sf_queens_2km_sub, color = "black", fill = "white") +
+  geom_sf(data = full_pois, aes(color = POIs, size = 0.75)) +
+  geom_jitter() +
+  scale_size_identity() +
+  coord_sf(datum = NA) +
+  annotation_north_arrow(location = "bl",
+                          which_north = "true",
+                          height = unit(0.7, "cm"),
+                          width = unit(0.4, "cm"),
+                          pad_x = unit(0.03, "in"),
+                          pad_y = unit(0.3, "in"),
+                          style = north_arrow_fancy_orienteering) +
+  annotation_scale(location = "bl", width_hint = 0.4, height = unit(0.07, "cm")) +
+  theme_minimal() 
 ```
 
 
@@ -209,13 +227,30 @@ poi_buffers50m <- full_pois %>%
   st_transform(crs = 3970) %>% 
   st_buffer(., dist = 30) 
   
-tm_shape(poi_buffers50m) +
-  tm_polygons(border.col = "red") + 
-    tm_shape(full_pois) + 
-    tm_dots(col = "POIs") + 
-    tm_shape(sf_queens_2km_sub) +
-    tm_lines(col = "black") + 
-    tm_layout(legend.outside = T)
+# tm_shape(poi_buffers50m) +
+#   tm_polygons(border.col = "red") + 
+#     tm_shape(full_pois) + 
+#     tm_dots(col = "POIs") + 
+#     tm_shape(sf_queens_2km_sub) +
+#     tm_lines(col = "black") + 
+#     tm_layout(legend.outside = T)
+
+ggplot() +
+  geom_sf(data = sf_queens_2km_sub, color = "black", fill = "white") +
+  geom_sf(data = poi_buffers50m, color = "red", alpha = 0) +
+  geom_sf(data = full_pois, aes(color = POIs, size = 0.75)) +
+  geom_jitter() +
+  scale_size_identity() +
+  coord_sf(datum = NA) +
+  annotation_north_arrow(location = "bl",
+                          which_north = "true",
+                          height = unit(0.7, "cm"),
+                          width = unit(0.4, "cm"),
+                          pad_x = unit(0.03, "in"),
+                          pad_y = unit(0.3, "in"),
+                          style = north_arrow_fancy_orienteering) +
+  annotation_scale(location = "bl", width_hint = 0.4, height = unit(0.07, "cm")) +
+  theme_minimal() 
 ```
 
 
@@ -280,17 +315,26 @@ if(file.exists(here::here("data/streets_with_POIs/streets_with_POIs_queens2km.sh
 #### Visualization 
 
 ```{r}
-t1 <- tm_shape(streets_with_POIs_queens2km) +
-  tm_lines(col = "nrm_dvr", 
+t1 <- tm_shape(streets_with_POIs_queens2km %>% rename(Norm.Div = nrm_dvr)) +
+  tm_lines(col = "Norm.Div", 
            palette = "PuRd", 
-           n = 7) +
-  tm_layout(legend.outside = T)
+           style = "fixed", 
+           breaks = c(0, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9, 1.0), 
+           labels = c("Low", "", "", "Medium", "", "", "High"),
+           n = 7
+           ) +
+  tm_layout(legend.outside = T, 
+            frame = F)
 
-t2 <- tm_shape(streets_with_POIs_queens2km) +
-  tm_lines(col = "n_pois", 
+t2 <- tm_shape(streets_with_POIs_queens2km %>% rename(Count.POIs = n_pois)) +
+  tm_lines(col = "Count.POIs", 
            palette = "PuRd", 
+           style = "fixed", 
+           breaks = c(0, 1, 2, 3, 4, 5, 6, 7), 
+           labels = c("Low", "", "", "Medium", "", "", "High"),
            n = 7) +
-  tm_layout(legend.outside = T)
+  tm_layout(legend.outside = T, 
+            frame = F)
 
 tmap_arrange(t1, t2, ncol = 1)
 ```
