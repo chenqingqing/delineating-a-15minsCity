@@ -12,10 +12,11 @@ editor_options:
 body {text-align: justify}
 </style>
 
-## Drawing the ‘15-minute City’ Bubble: Crowd simulation to detect the size of community-life circle in New York City
+## Drawing the ‘15-minute City’ Bubble: Crowd simulation to detect the size of local community-life circle in New York City
 
 ### Contents
 
 - [Chapter 1: Construct street networks](001-construct-street-networks.html)
 - [Chapter 2: Extract POIs](002-extract-POIs.html)
-- [Chapter 3: Model presentation](model-presentation.pdf)
+- [Chapter 3: Model development](003-model-development.html)
+- [Chapter 4: Model presentation](model-presentation-slides.pdf)
