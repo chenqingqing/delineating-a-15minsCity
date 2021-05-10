@@ -17,6 +17,7 @@ library(tidyverse)
 library(dplyr)
 library(sf)
 library(tmap)
+library(ggspatial)
 ```
 
 
@@ -29,7 +30,7 @@ ax = ox.project_gdf(city).plot()
 _ = ax.axis('off')
 
 # download and model street networks
-queens = ox.graph_from_address('Queens, New York City, New York, USA', network_type = 'walk', dist = 1500)
+queens = ox.graph_from_address('Queens, New York City, New York, USA', network_type = 'walk', dist = 2000)
 ox.plot_graph(queens)
 
 ox.io.save_graph_shapefile(queens, filepath="../data/interim/street-network", encoding='utf-8', directed=False)
@@ -50,19 +51,45 @@ sf_queens_2km_sub <- sf_queens_2km %>%
 
 #### Original street networks
 ```{r}
-tm_shape(sf_queens_2km) + 
-  tm_lines(col = "black", lwd = 1.5) +
-  tm_layout(frame = F) +
-  tm_credits("Residential street networks of Queens, New York City (2km from geographical center)", 
-              position = c("left", "bottom"))
+# tm_shape(sf_queens_2km) + 
+#   tm_lines(col = "black", lwd = 1.5) +
+#   tm_layout(frame = F) +
+#   tm_credits("Residential street networks of Queens, New York City (2km from geographical center)", 
+#               position = c("left", "bottom"))
+ggplot() +
+    geom_sf(data = sf_queens_2km, color = "black", fill = "white") +
+    scale_size_identity() +
+    coord_sf(datum = NA) +
+    annotation_north_arrow(location = "bl",
+                           which_north = "true",
+                           height = unit(0.7, "cm"),
+                           width = unit(0.4, "cm"),
+                           pad_x = unit(0.03, "in"),
+                           pad_y = unit(0.3, "in"),
+                           style = north_arrow_fancy_orienteering) +
+    annotation_scale(location = "bl", width_hint = 0.4, height = unit(0.07, "cm")) +
+    theme_minimal()
 ```
 
 #### Simplified street networks 
 ```{r}
-tm_shape(sf_queens_2km_sub) + 
-  tm_lines(col = "black", lwd = 1.5) +
-  tm_layout(frame = F) +
-  tm_credits("Residential street networks of Queens, New York City (2km from geographical center)", 
-              position = c("left", "bottom"))
+# tm_shape(sf_queens_2km_sub) + 
+#   tm_lines(col = "black", lwd = 1.5) +
+#   tm_layout(frame = F) +
+#   tm_credits("Residential street networks of Queens, New York City (2km from geographical center)", 
+#               position = c("left", "bottom"))
+ggplot() +
+    geom_sf(data = sf_queens_2km_sub, color = "black", fill = "white") +
+    scale_size_identity() +
+    coord_sf(datum = NA) +
+    annotation_north_arrow(location = "bl",
+                           which_north = "true",
+                           height = unit(0.7, "cm"),
+                           width = unit(0.4, "cm"),
+                           pad_x = unit(0.03, "in"),
+                           pad_y = unit(0.3, "in"),
+                           style = north_arrow_fancy_orienteering) +
+    annotation_scale(location = "bl", width_hint = 0.4, height = unit(0.07, "cm")) +
+    theme_minimal()
 ```
 
