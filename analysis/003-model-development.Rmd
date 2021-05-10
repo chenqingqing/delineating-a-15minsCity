@@ -1,0 +1,30 @@
+---
+title: "Model development"
+author: "Qingqing Chen"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  workflowr::wflow_html:
+    toc: false
+    code_folding: hide
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+
+### Model GUI
+```{r}
+library(png)
+library(grid)
+gui <- readPNG(here::here("data/pic/gui.png"))
+grid.raster(gui)
+```
+
+
+- All codes and data of the model hosted on: https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/main/model
+
+- A simple demo of the model can be found at: https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/main/model/demo
+
