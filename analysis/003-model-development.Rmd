@@ -44,8 +44,11 @@ gui <- readPNG(here::here("data/pic/gui.png"))
 grid.raster(gui)
 ```
 
+## Resources
 
-- All codes and data of the model hosted on: https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/main/model
+- All codes and data of the model are hosted on: https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/main/model
 
 - A simple demo of the model can be found at: https://github.com/chenqingqing/draw-15minsCity-bubbles/tree/main/model/demo
+
+- Project website is hosted on: https://draw-15mins-city.netlify.app/
 
