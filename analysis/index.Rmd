@@ -19,4 +19,5 @@ body {text-align: justify}
 - [Chapter 1: Construct street networks](001-construct-street-networks.html)
 - [Chapter 2: Extract POIs](002-extract-POIs.html)
 - [Chapter 3: Model development](003-model-development.html)
-- [Chapter 4: Model presentation](model-presentation-slides.pdf)
+- [Chapter 4: Model experiment](004-model-experiments.html)
+- [Chapter 5: Model presentation](model-presentation-slides.pdf)
