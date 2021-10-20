@@ -1,4 +1,4 @@
-; Drawing the ‘15-minute City’ Bubble model v01.nlogo
+; Delineating the ‘15-minute City’ Bubble model v01.nlogo
 ; This model simulate residential movement on streets from the bottom-up by drawing a community-bubble of a city
 
 ;GIS extension
@@ -459,8 +459,8 @@ to random-walk
   ; count the number of people within the bubble
   set N_PERSON count persons in-radius BUBBLE-RADIUS
 
-
-  ifelse ([POIs] of target > 0) [set energy energy + [ POIs ] of target * 20] [set energy energy - 0.5]
+  ifelse ([POIs] of target > 0) [set energy energy + [ POIs ] of target * energy-gained] [set energy energy - energy-lost]
+  ;ifelse ([POIs] of target > 0) [set energy energy + [ POIs ] of target * 20] [set energy energy - 0.5]
 
   if energy < 0 [ die ]
   set n-current-persons count persons
@@ -713,10 +713,10 @@ NIL
 1
 
 SWITCH
-209
-154
-340
-187
+207
+142
+341
+175
 show-ID?
 show-ID?
 1
@@ -758,10 +758,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-211
-383
+207
+314
 340
-416
+347
 show-path?
 show-path?
 1
@@ -797,20 +797,20 @@ PENS
 "default" 1.0 1 -16777216 true "" "plot standard-deviation [distance START-PATCH] of persons"
 
 CHOOSER
-210
-439
-340
-484
+206
+354
+339
+399
 path-type
 path-type
 "diffusion" "no diffusion"
-0
+1
 
 SWITCH
-210
-272
+208
+234
 340
-305
+267
 show-rings?
 show-rings?
 1
@@ -818,10 +818,10 @@ show-rings?
 -1000
 
 SLIDER
-210
-328
-340
-361
+207
+274
+339
+307
 ring-radius
 ring-radius
 0
@@ -833,10 +833,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-209
-204
+207
+182
 340
-249
+227
 base-map
 base-map
 "show POIs" "hide POIs"
@@ -864,60 +864,60 @@ Please choose the number of people (default = 100):
 1
 
 TEXTBOX
-542
-21
-960
-55
-Drawing the ‘15-minute City’ Bubble
-22
+577
+24
+964
+58
+Delineating a ‘15-Minute City’
+23
 0.0
 1
 
 TEXTBOX
-60
-156
-202
-186
+58
+144
+200
+174
 Do you wanna show people's IDs?
 11
 0.0
 1
 
 TEXTBOX
-61
-214
-202
-246
+59
+192
+200
+224
 Which you wanna show POIs value?\n
 11
 0.0
 1
 
 TEXTBOX
-60
-277
-210
-305
+58
+239
+208
+267
 Do you wanna show rings on the background?
 11
 0.0
 1
 
 TEXTBOX
-62
-379
-212
-421
+58
+309
+208
+351
 Do you wanna paint the path that people have walked through?
 11
 0.0
 1
 
 TEXTBOX
-60
-451
-197
-479
+57
+361
+194
+389
 How do you wanna paint the path?
 11
 0.0
@@ -964,10 +964,10 @@ TEXTBOX
 1
 
 TEXTBOX
-62
-332
-212
-360
+59
+274
+209
+302
 How large the rings?\n(default radius = 50)
 11
 0.0
@@ -978,7 +978,7 @@ TEXTBOX
 633
 205
 655
-Draw the Bubble
+Draw the Cicle
 18
 0.0
 1
@@ -998,7 +998,7 @@ TEXTBOX
 672
 203
 728
-How do you wanna draw the bubble?\n(default = average walking distance)
+How do you wanna draw the circle?\n(default uses the verage walking distance)
 11
 0.0
 1
@@ -1074,24 +1074,74 @@ TEXTBOX
 1
 
 CHOOSER
-209
-495
-340
-540
+202
+492
+341
+537
 Situation
 Situation
 "Original" "Random"
-0
+1
 
 TEXTBOX
-60
-504
-210
-522
+55
+505
+205
+523
 Choose a situation:
 11
 0.0
 1
+
+SLIDER
+205
+407
+339
+440
+energy-gained
+energy-gained
+0
+100
+20.0
+1
+1
+NIL
+HORIZONTAL
+
+TEXTBOX
+55
+407
+205
+449
+How much energy does an agent gain every time step?
+11
+0.0
+1
+
+TEXTBOX
+54
+450
+204
+478
+How much energy does an agent lost every time step?
+11
+0.0
+1
+
+SLIDER
+204
+450
+340
+483
+energy-lost
+energy-lost
+0
+10
+0.5
+0.5
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
