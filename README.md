@@ -17,4 +17,7 @@ With progressively increased people living in cities, and lately the global COVI
 
 ## Model Demo
 
-[![Watch the video](https://i9.ytimg.com/vi/Rvt0NO4y5z8/mq2.jpg?sqp=CNyGjJcG&rs=AOn4CLBfkmieiYdIvICFHGlrOEtQdPX8Rw)]([https://youtu.be/T-D1KVIuvjA](https://youtu.be/Rvt0NO4y5z8))
+[Watch the video](https://youtu.be/Rvt0NO4y5z8)
+
+
+
